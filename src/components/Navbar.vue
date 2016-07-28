@@ -1,7 +1,7 @@
 <template>
   <nav class="header cov-nav">
     <template v-for="route in _routes">
-      <div :class="['nav-tab','r-'+route.name]" @click="navRoute($event, route.name, $index + 1)">
+      <div v-if='route.display' :class="['nav-tab','r-'+route.name]" @click="navRoute($event, route.name, $index + 1)">
         {{route.title}}
       </div>
     </template>
@@ -12,7 +12,8 @@
 </template>
 
 <script>
-  // v-link="{ exact: true , path: father + route.path }"   
+  // v-link="{ exact: true , path: father + route.path }"  
+
   export default {
     name: 'v-navbar',
     props: {
@@ -25,6 +26,12 @@
       father: {
         type: String,
         default: ''
+      },
+      disbar:{
+        type:Object,
+        default () {
+          return {}
+        }
       }
     },
     data(){
@@ -40,7 +47,7 @@
       }
     },
     ready () {
-        this.initNav()
+        this.initNav();
     },
     methods:{
         navRoute (e, name, index){
@@ -51,7 +58,6 @@
         initNav () {
             let nodes = document.getElementsByClassName('nav-tab'),
                 curNode = document.getElementsByClassName('r-'+this.$route.name)[0]
-
             for(let i in nodes){
               if(nodes[i] === curNode){
                   let x = curNode.clientWidth * (+(i)+1 - 0.5)
@@ -96,10 +102,13 @@
       .filter(key => !routes[key].hidden)
       .map(key => {
         const route = routes[key]
-        return {
+        // if(route.display){
+          return {
           path : route.path || key,
           name : route.name,
-          title: route.title
+          title: route.title,
+          display: route.display
+        // }
         }
       })
     }

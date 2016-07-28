@@ -1,7 +1,7 @@
 <template>
 	<article class="list-item">
 		<div class="item-preview" :style="{'background-image': 'url('+ cloudSrc +')'}"></div>
-		<p class="item-title">
+		<p class="item-title" @click="showDetail(data.id)">
 			<template v-if='data.top || data.good'>
 				<span v-show='data.top' class="put_top">置顶</span>
 				<span v-show='data.good' class="put_good">精华</span>
@@ -25,6 +25,11 @@
                 required: true
             }
         },
+		methods:{
+			showDetail(id){
+              this.$route.router.go({name: 'detail',params:{id}})
+			}
+		},
         data () {
             return {
                 cloudSrc: require('../assets/Duck.jpg')
