@@ -2,13 +2,13 @@
     <article>
         <div class="rep-title">
             <div class="avatar fl" :style="{'background-image':'url('+avatar_url+')'}"></div>
-            <div class="info fl">
-                <div class="name fl"><span>{{item.author.loginname}}</span></div>
-                <div class="date fl"><span>{{index+1}}楼*{{_howlong}}</span></div>
-            </div>
-            <div v-if='_upslength' class="other fr">
-                <li class="praise"></li>
-                <span>{{item.ups.length}}</span>
+            <div class="name fl"><span>{{item.author.loginname}}</span></div>
+            <div class="fr">
+                <div class="date"><span>{{index+1}}楼*{{_howlong}}</span></div>
+                <div v-if='_upslength' class="other fr">
+                    <li class="praise"></li>
+                    <span>{{item.ups.length}}</span>
+                </div>
             </div>
         </div>
         <div class="replies">
@@ -72,9 +72,9 @@ export default {
         padding: 0 0.6rem;
     }
     
-    .info div{
+    .name {
         height: 2rem;
-        line-height:2rem;
+        line-height: 2rem;
         margin-left: 0.8rem;
     }
     
